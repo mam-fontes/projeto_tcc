@@ -52,6 +52,9 @@ public class Main {
                     default:
                         System.out.println("Opção inválida. Digite 1 para realizar um novo levantamento de estoque ou 2 para consultar o histórico de algum produto.");
                 case 2:
+                    break;
+                case 3:
+                    break;
 
                 }
 
