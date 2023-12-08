@@ -42,7 +42,7 @@ public class Main {
                         int opcaoEstoque = leitura.nextInt();
                         switch (opcaoEstoque){
                             case 1: //consulta estoque
-                                Estoque consultaEstoque =new Estoque();
+                                Estoque consultaEstoque = new Estoque();
 
                             break;
                             case 2: //registra estoque
