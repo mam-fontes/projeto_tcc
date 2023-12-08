@@ -1,5 +1,5 @@
 package tcc.projetogestaoestoque;
-
+import java.sql.*;
 import java.time.LocalDate;
 
 public class Estoque {

@@ -1,5 +1,5 @@
 package tcc.projetogestaoestoque;
-
+import java.sql.*;
 import tcc.projetogestaoestoque.Cliente;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,7 +12,17 @@ public class ClienteDAO {
         private static final String user = "root";
         private static final String senha = "BfAi.2833@error";
 
-        public Cliente buscarCliente(int codigoCliente) {
+    static {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Erro ao carregar o driver JDBC do MySQL");
+        }
+    }
+
+
+    public Cliente buscarCliente(int codigoCliente) {
             Cliente cliente = null;
 
             try (Connection conexao = DriverManager.getConnection(url, user, senha)) {

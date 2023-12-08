@@ -1,5 +1,5 @@
 package tcc.projetogestaoestoque;
-
+import java.sql.*;
 public class Representante {
     private int codRepresentante;
     private String nomeRepresentante;

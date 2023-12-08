@@ -1,5 +1,5 @@
 package tcc.projetogestaoestoque;
-
+import java.sql.*;
 public class Cliente {
     private int codCliente;
     private String nomeFantasiaCliente;

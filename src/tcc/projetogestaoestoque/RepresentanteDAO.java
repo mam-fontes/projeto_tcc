@@ -1,5 +1,5 @@
 package tcc.projetogestaoestoque;
-
+import java.sql.*;
 import tcc.projetogestaoestoque.Representante;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,6 +12,16 @@ public class RepresentanteDAO {
     private static final String url = "jdbc:mysql://localhost:3306/teste_bd_tcc";
     private static final String user = "root";
     private static final String senha = "BfAi.2833@error";
+
+    static {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Erro ao carregar o driver JDBC do MySQL");
+        }
+    }
+
 
     public Representante buscarRepresentante(int codigoRepresentante) {
         Representante representante = null;
