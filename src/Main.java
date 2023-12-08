@@ -1,64 +1,76 @@
-import tcc.projetogestaoestoque.consultaestoque.Estoque;
+import tcc.projetogestaoestoque.*;
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         int opcao;
-        int sair = 0;
-        String nomeCliente;
+        int sair = 1;
+        int codCliente;
+        int codRep;
         String menuInicial = """
                 ********************************************
-                \nOlá!
-                Seja bem vindo ao sistema de gestão de estoque dos seus clientes.
+                \n
                 Por gentileza, digite a opção desejada:
-                \n1 - Consultar estoque
+                \n1 - Estoque
                 2 - Consultar últimos pedidos
-                3 - Gerar sugestão de pedido 
+                3 - Gerar sugestão de pedido
+                4 - Sair
                 """;
-        Estoque estoque = new Estoque();
+        Representante representante = new Representante();
+        RepresentanteDAO representanteDAO = new RepresentanteDAO();
+        ClienteDAO clienteDAO = new ClienteDAO();
         Scanner leitura = new Scanner(System.in);
-        System.out.println("Por favor digite o nome do cliente para comerçarmos: ");
-        nomeCliente = leitura.nextLine();
-        System.out.println(menuInicial);
-        opcao = leitura.nextInt();
+        System.out.println("Olá!\nSeja bem vindo ao sistema de gestão de estoque dos seus clientes.");
+        System.out.println("Por favor digite seu código de representante:");
+        codRep = leitura.nextInt();
+        Representante representanteConsultado = representanteDAO.buscarRepresentante(codRep);
 
-        switch (opcao){
-            case 1:
-                System.out.println(estoque.getMenuEstoque());
-                int opcaoEstoque = leitura.nextInt();
-                switch (opcaoEstoque){
-                    case 1:
-                        while (estoque.getNomeProduto() != "sair") {
-                            System.out.println("Digite o nome do produto ou digite SAIR para encerrar o cadastro do estoque:");
-                            estoque.getNomeProduto() = leitura.nextLine();
-                            //buscar produto pelo nome no banco de dados
-                            System.out.println("Digite o estoque do produto:");
-                            estoque.getQuantidade() = leitura.nextInt();
-                            //salvar o estoque no banco de dados
+        System.out.println("Por favor digite o código do cliente para começarmos: ");
+        codCliente = leitura.nextInt();
+        Cliente clienteConsultado = clienteDAO.buscarCliente(codCliente);
+
+        do {
+            System.out.println(menuInicial);
+            opcao = leitura.nextInt();
+
+            switch (opcao){
+                case 1:
+                    int sairEstoque = 1;
+                    do {
+                        System.out.println("Escolha o que você deseja fazer:\n1 - Consultar estoque do cliente\n2 - Efetuar um novo registro de estoque\n3 - Sair");
+                        int opcaoEstoque = leitura.nextInt();
+                        switch (opcaoEstoque){
+                            case 1: //consulta estoque
+                                Estoque consultaEstoque =new Estoque();
+
+                            break;
+                            case 2: //registra estoque
+                            break;
+                            case 3:
+                                System.out.println("Retornando ao menu anterior");
+                                sairEstoque = 0;
+                                break;
+                            default:
+                                System.out.println("Opção inválida. Escolha uma das opções mencionadas no menu.");
+                                break;
                         }
-                        break;
-                    case 2:
-                        while (sair == 1) {
-                            System.out.println("Digite o nome do produto que você deseja buscar o histórico:");
-                            estoque.getNomeProduto() = leitura.nextLine();
-                            System.out.println("Digite a quantos registros você deseja verificar:");
-                            int quantiaRegistros = leitura.nextInt();
-                            //busca histórico do produto
-                            System.out.println("Deseja realizar mais alguma consulta? Digite 1 para sim e 2 para sair.");
-                            sair = leitura.nextInt();
-                        }
-                        break;
-                    default:
-                        System.out.println("Opção inválida. Digite 1 para realizar um novo levantamento de estoque ou 2 para consultar o histórico de algum produto.");
+                    } while (sairEstoque != 0);
+                    break;
                 case 2:
                     break;
                 case 3:
                     break;
-
-                }
-
-        }
-
+                case 4:
+                    System.out.println("Você escolheu sair. Até mais!");
+                    sair = 0;
+                    break;
+                default:
+                    System.out.println("Opção inválida. Escolha alguma opção válida, conforme mencionada no menu.");
+                    break;
+            }
+        } while (sair != 0);
+        leitura.close();
     }
+
 }

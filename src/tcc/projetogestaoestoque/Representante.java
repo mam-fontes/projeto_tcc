@@ -1,8 +1,16 @@
-package tcc.projetogestaoestoque.entidades;
+package tcc.projetogestaoestoque;
 
 public class Representante {
     private int codRepresentante;
     private String nomeRepresentante;
+
+    public Representante(){
+    }
+
+    public Representante(int codRepresentante, String nomeRepresentante){
+        this.codRepresentante = codRepresentante;
+        this.nomeRepresentante = nomeRepresentante;
+    }
 
     public int getCodRepresentante() {
         return codRepresentante;
